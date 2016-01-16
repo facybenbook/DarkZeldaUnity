@@ -6,7 +6,7 @@ public class Teleport : MonoBehaviour {
 
     public string TeleportID;
     public string SceneName;
-    public string facing;
+    public Facing facing;
 
     static TeleportManager manager;
 

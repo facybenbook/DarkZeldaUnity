@@ -2,9 +2,9 @@
 {
     public string id;
     public string SceneName;
-    public string facing;
-
-    public TeleportInfo(string id, string scenename, string facing)
+    public Facing facing;
+ 
+    public TeleportInfo(string id, string scenename, Facing facing)
     {
         this.id = id;
         this.SceneName = scenename;

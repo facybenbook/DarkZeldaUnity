@@ -65,28 +65,27 @@ public class TeleportManager : MonoBehaviour {
             {
                 lastTeleporter = null;
                 // facing is a string containing a direction that the animation should be... not used currently just set.
-                player.facing = tp.info.facing;
+                //player.facing = tp.info.facing;
 
                 //if the player is on the teleport zone it will call OnEnterTrigger2D and be stuck in an endless loop.
                 //so we move it over depending on the teleporters facing string.
                 Vector3 facing = new Vector3(0f, 0f, 0f);
 
-                switch (tp.info.facing.ToLower())
+                switch (tp.info.facing)
                 {
-                    case "up":
+                    case Facing.Up:
                         facing.y = 1.1f;
                         break;
-                    case "down":
+                    case Facing.Down:
                         facing.y = -1.1f;
                         break;
-                    case "left":
+                    case Facing.Left:
                         facing.x = -1.1f;
                         break;
-                    case "right":
+                    case Facing.Right:
                         facing.x = 1.1f;
                         break;
                     default:
-                        print("Unknown Facing: " + tp.info.facing.ToLower());
                         break;
                 }
 
