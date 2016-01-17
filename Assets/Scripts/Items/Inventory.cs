@@ -4,15 +4,20 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour {
 
     public List<Item> items;
+    public PlayerAttacking playerAttacking;
 
 	// Use this for initialization
 	void Start () {
-        items = new List<Item>();
-        items.Add(ScriptableObject.CreateInstance("Sword") as Item);
+        // this Hard codes an item in to the first slot.
+        playerAttacking = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttacking>();
+        playerAttacking.item1 = CreateItem(items[0]);
+        playerAttacking.item1Script = playerAttacking.item1.GetComponent<ItemScript>();
 	}
 
-    public void useItem(int index)
+    public GameObject CreateItem (Item itemAsset)
     {
-        items[index].GetType().GetMethod("Use").Invoke(items[index], null);
+        GameObject item = Instantiate(itemAsset.itemPrefab, transform.position, Quaternion.identity) as GameObject;
+        item.transform.SetParent(transform);
+        return item;
     }
 }
