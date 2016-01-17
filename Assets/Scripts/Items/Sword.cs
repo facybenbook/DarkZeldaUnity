@@ -4,15 +4,17 @@ using System.Collections;
 public class Sword : Item {
 
     Animator playerAnimator;
-    public int damage;
     BoxCollider2D hitbox;
+
+    public int damage;
 
     void OnEnable()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         GameObject go = Instantiate(Resources.Load("SwordHitBox") as GameObject);
-        go.transform.parent = player.transform;
+        go.transform.SetParent(player.transform.FindChild("ImagePoints").FindChild("ImagePoint"), false);
+
         hitbox = go.GetComponent<BoxCollider2D>();
 
         playerAnimator = player.GetComponent<Animator>();
@@ -25,4 +27,5 @@ public class Sword : Item {
     {
         playerAnimator.SetTrigger("isAttacking");
     }
+
 }
