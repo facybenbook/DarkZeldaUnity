@@ -11,6 +11,8 @@ public class Hands : ItemScript
     Animator playerAnimator;
     BoxCollider2D hitbox;
 
+    int attackHash;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -21,6 +23,8 @@ public class Hands : ItemScript
 
         playerAnimator = player.GetComponent<Animator>();
         damage = 1;
+        attackHash = Animator.StringToHash("Base Layer.Attack");
+
 
     }
 
@@ -29,10 +33,15 @@ public class Hands : ItemScript
         hitbox.transform.position = imagePoint.position;
     }
 
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    //print("Hand Collision");
-    //}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        AnimatorStateInfo stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        if(stateInfo.fullPathHash == attackHash)
+        {
+            print(name + " Collided");
+        }
+
+    }
 
     public override void Use()
     {
