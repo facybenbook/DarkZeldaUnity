@@ -552,6 +552,7 @@ GameObject:
   - 224: {fileID: 969466453}
   - 222: {fileID: 969466455}
   - 114: {fileID: 969466454}
+  - 114: {fileID: 969466456}
   m_Layer: 5
   m_Name: InventoryUI
   m_TagString: Untagged
@@ -611,6 +612,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 969466452}
+--- !u!114 &969466456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 969466452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95420279c949aa4e921a2f352ee6084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995363997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 149c72cbe56befc4199bcafcde1533f0, type: 2}
+  - {fileID: 11400000, guid: 5c851fa0c2338bc4abe1f9761a67db88, type: 2}
 --- !u!1 &1832631700
 GameObject:
   m_ObjectHideFlags: 0

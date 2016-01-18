@@ -9,8 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efd8d926c9a21a142a6b59636c1a7c8d, type: 3}
-  m_Name: Sword
+  m_Name: Hands
   m_EditorClassIdentifier: 
-  description: A Sword....
-  uiTexture: {fileID: 2800000, guid: c002acffd3e286f40b40734e6be8a29e, type: 3}
-  itemPrefab: {fileID: 156816, guid: 09e2bed4832f74247b42413cb20fce2b, type: 2}
+  itemType: 0
+  description: Your Hands
+  uiTexture: {fileID: 21300006, guid: 04811db11660fa34bbe5204ff8e16034, type: 3}
+  itemPrefab: {fileID: 112644, guid: edfdd4946acc574469c08c60524bc0d6, type: 2}

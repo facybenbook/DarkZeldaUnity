@@ -3,9 +3,9 @@ using System.Collections;
 
 [CreateAssetMenu]
 public class Item : ScriptableObject {
-
+    public ItemTypes itemType;
     public string description;
-    public Texture2D uiTexture;
+    public Sprite uiTexture;
     public Object itemPrefab;
 
 }

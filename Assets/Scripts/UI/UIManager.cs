@@ -54,12 +54,12 @@ public class UIManager : MonoBehaviour {
             {
 
                 _ActiveMenu.gameObject.SetActive(true);
-                output = "Menu Opened";
+                output = " Menu Opened";
             }
             else
             {
                 _ActiveMenu.gameObject.SetActive(false);
-                output = "Menu Closed";
+                output = " Menu Closed";
             }
             print(ActiveMenu + output);
         }

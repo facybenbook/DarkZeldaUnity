@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sword : ItemScript {
+public class Hands : ItemScript
+{
 
     public int damage;
 
@@ -19,18 +20,17 @@ public class Sword : ItemScript {
 
         playerAnimator = player.GetComponent<Animator>();
 
-        damage = 5;
+        damage = 1;
 
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        print("Sword Collision");
-    }
+    //void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    //print("Hand Collision");
+    //}
 
     public override void Use()
     {
-        print("Sword Used");
         playerAnimator.SetTrigger("isAttacking");
     }
 }

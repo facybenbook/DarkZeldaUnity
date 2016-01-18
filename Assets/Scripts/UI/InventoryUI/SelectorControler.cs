@@ -45,22 +45,24 @@ public class SelectorControler : MonoBehaviour {
 
         if(Input.GetButtonDown("Fire1"))
         {
-            if (playerAttack.fire1 != cIndex && cIndex <= inv.items.Count - 1)
+            if (cIndex <= inv.items.Count - 1)
             {
                 playerAttack.fire1 = cIndex;
                 Destroy(playerAttack.item1);
                 playerAttack.item1 = inv.CreateItem(inv.items[cIndex]);
                 playerAttack.item1Script = playerAttack.item1.GetComponent<ItemScript>();
+                print("item 1 changed.");
             }
         }
-        if (Input.GetButtonDown("Fire2") && cIndex <= inv.items.Count - 1)
+        if (Input.GetButtonDown("Fire2"))
         {
-            if (playerAttack.fire2 != cIndex)
+            if (cIndex <= inv.items.Count - 1)
             {
                 playerAttack.fire2 = cIndex;
                 Destroy(playerAttack.item2);
                 playerAttack.item2 = inv.CreateItem(inv.items[cIndex]);
                 playerAttack.item2Script = playerAttack.item2.GetComponent<ItemScript>();
+                print("item 2 changed.");
             }
         }
     }

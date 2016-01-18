@@ -1,0 +1,1 @@
+﻿public enum ItemTypes { Weapon, Consumable, KeyItem};
