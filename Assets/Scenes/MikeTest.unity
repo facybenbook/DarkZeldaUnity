@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912c12aec20f4ca40966a008b195111f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOfDay: 50
+  timeOfDay: 99
   isDay: 1
-  pauseTime: 10
-  timeSpd: 1
+  pauseTime: 30
+  timeSpd: 0.5
 --- !u!114 &78150545
 MonoBehaviour:
   m_ObjectHideFlags: 0
