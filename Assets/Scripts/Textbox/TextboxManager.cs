@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class TextboxManager : MonoBehaviour
 {
-
     public GameObject textBox;
     public Text text;
     public float writeSpeed;
