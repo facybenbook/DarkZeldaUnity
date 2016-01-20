@@ -7,12 +7,13 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D player;
     private static bool playerExists;
-    //private Animator anim;
+    [HideInInspector]
+    public float stunTimer;
 
 	// Use this for initialization
 	void Start () {
         player = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+
 
         if (!playerExists)
         {
@@ -29,11 +30,16 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(stunTimer > 0)
+        {
+            stunTimer -= Time.deltaTime;
+        }
+        else
+        {
+            player.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized * moveSpd;
+            stunTimer = 0;
+        }
 
-        player.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized * moveSpd;
-
-        //anim.SetFloat("curX", Input.GetAxis("Horizontal"));
-        //anim.SetFloat("curY", Input.GetAxis("Vertical"));
 
     }
 }

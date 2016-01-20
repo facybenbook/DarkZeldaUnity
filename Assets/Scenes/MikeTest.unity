@@ -277,6 +277,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 174896, guid: 3ac8181adbadc794993d5445139f2419, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ac8181adbadc794993d5445139f2419, type: 2}
   m_IsPrefabParent: 0
@@ -928,7 +932,7 @@ Transform:
 --- !u!4 &1074167327 stripped
 Transform:
   m_PrefabParentObject: {fileID: 435388, guid: dde6a3961c6e6574c85047988f47e13a, type: 2}
-  m_PrefabInternal: {fileID: 1626725752}
+  m_PrefabInternal: {fileID: 1627859426}
 --- !u!1 &1087448398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,6 +1173,7 @@ GameObject:
   - 114: {fileID: 1213141737}
   - 114: {fileID: 1213141741}
   - 114: {fileID: 1213141740}
+  - 114: {fileID: 1213141742}
   m_Layer: 0
   m_Name: PunchingBag
   m_TagString: Enemy
@@ -1289,6 +1294,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunTimer: 0
+--- !u!114 &1213141742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1213141734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a28f020f9881f438e3370ee0f31ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: -1
+  knockback: 7
+  knockbackRandomness: 4
+  stunLock: 0.25
 --- !u!1 &1263457527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1377,7 @@ GameObject:
   - 124: {fileID: 1359792441}
   - 81: {fileID: 1359792440}
   - 114: {fileID: 1359792445}
+  - 114: {fileID: 1359792446}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1393,7 +1414,7 @@ Camera:
   m_GameObject: {fileID: 1359792439}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1406,7 +1427,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 6
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1430,7 +1451,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1359792445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,7 +1474,20 @@ MonoBehaviour:
   maxX: 0
   minY: 0
   maxY: 0
---- !u!1001 &1626725752
+--- !u!114 &1359792446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1359792439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14ca7955f36f184aa19e04fde83f047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  intensity: 0
+--- !u!1001 &1627859426
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2

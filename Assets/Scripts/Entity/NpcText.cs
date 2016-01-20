@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 public class NpcText : MonoBehaviour {
 
     CircleCollider2D coll;

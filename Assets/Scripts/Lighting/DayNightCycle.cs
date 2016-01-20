@@ -45,7 +45,7 @@ public class DayNightCycle : MonoBehaviour {
 
         if(waitTimer > 0)
         {
-            waitTimer -= Time.deltaTime;
+            waitTimer -= Time.deltaTime * timeSpd;
         } else
         {
             waitTimer = 0f;
