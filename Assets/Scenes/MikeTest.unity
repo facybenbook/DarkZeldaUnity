@@ -699,6 +699,18 @@ Transform:
   - {fileID: 2074881534}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+--- !u!114 &943516870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e041e7f7a060e4ea13665ec1e409cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodes: []
 --- !u!1 &969466452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,8 +1932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b1d8af08a70304595b6c6d1e517ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversation:
-  - {fileID: 0}
+  conversation: {fileID: 943516870}
 --- !u!58 &2074881536
 CircleCollider2D:
   m_ObjectHideFlags: 0

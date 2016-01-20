@@ -2,72 +2,21 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-[CreateAssetMenu]
+
 public class Conversation : ScriptableObject {
 
-    public static GameProgress progress;
-
-    public string[] currentConditions;
-    public string[] completedConditions;
-    public string[] actions;
-
-
-    void OnEnable()
+    //public  Dictionary<int, Node> nodes = new Dictionary<int, Node>();
+    public List<Node> nodes = new List<Node>();
+    private int id = 0;
+    public int nextId
     {
-        progress = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameProgress>();
-        //functions = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScriptableFunctionsManager>();
-
-    }
-
-    bool evalConditions ()
-    {
-        foreach (string condition in currentConditions)
+        get
         {
-            if (condition.StartsWith("!"))
-            {
-                if (progress.currentEvents.Contains(condition)) {
-                    return false;
-                }
-            }
-            else
-            {
-                if (!progress.currentEvents.Contains(condition))
-                {
-                    return false;
-                }
-            }
-        }
+            int nextId = id;
+            id++;
+            return nextId;
 
-        foreach (string condition in completedConditions)
-        {
-            if (condition.StartsWith("!"))
-            {
-                if (progress.completedEvents.Contains(condition)) {
-                    return false;
-                }
-            }
-            else
-            {
-                if (!progress.completedEvents.Contains(condition))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    public void runActions()
-    {
-        foreach(string action in actions)
-        {
-            switch (action)
-            {
-                case "ShowTextBox":
-                    //functions.showTextBox("sometext", true, false);
-                    break;
-                case "This would get super tedious..":
-                    break;
-            }
         }
     }
+
 }

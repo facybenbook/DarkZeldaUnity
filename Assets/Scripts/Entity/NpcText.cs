@@ -5,7 +5,7 @@ public class NpcText : MonoBehaviour {
     CircleCollider2D coll;
     CircleCollider2D playerColl;
 
-    public Conversation[] conversation;
+    public Conversation conversation;
 
 	// Use this for initialization
 	void Start ()
