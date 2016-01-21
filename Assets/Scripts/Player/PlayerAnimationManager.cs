@@ -53,6 +53,6 @@ public class PlayerAnimationManager : MonoBehaviour {
             isAttacking = false;
         }
 
-        imagePoint.transform.position = player.transform.position + new Vector3(anim.GetFloat("lastX"), anim.GetFloat("lastY")).normalized/4;
+        imagePoint.transform.position = player.transform.position + new Vector3(anim.GetFloat("lastX"), anim.GetFloat("lastY")).normalized/2;
     }
 }
