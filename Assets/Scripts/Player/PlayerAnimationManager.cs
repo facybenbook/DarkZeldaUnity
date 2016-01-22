@@ -34,8 +34,17 @@ public class PlayerAnimationManager : MonoBehaviour {
 
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            anim.SetFloat("lastX", FloorOrCeil(Input.GetAxis("Horizontal")));
-            anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("Vertical")));
+
+            if(Mathf.Abs(Input.GetAxis("Horizontal")) > Mathf.Abs(Input.GetAxis("Vertical")))
+            {
+                anim.SetFloat("lastX", FloorOrCeil(Input.GetAxis("Horizontal")));
+                anim.SetFloat("lastY", 0f);
+            }
+            else
+            {
+                anim.SetFloat("lastX", 0f);
+                anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("Vertical")));
+            }
         }
 
         if (player.velocity.magnitude == 0)
