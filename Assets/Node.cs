@@ -8,8 +8,16 @@ public class Node : ScriptableObject {
 
     public float x;
     public float y;
+    public float width;
+    public float height;
+
+    public bool hideConditions= false;
+    public bool hideText = false;
+    public bool hideActions = false;
+
     public string text;
     public List<int> childIDs;
+    public string conditions;
 
     void OnEnable()
     {
@@ -17,7 +25,10 @@ public class Node : ScriptableObject {
         {
             childIDs = new List<int>();
         }
-
+        if (conditions == null)
+        {
+            conditions = "";
+        }
         if (text == null)
         {
             text = "";

@@ -12,14 +12,10 @@ MonoBehaviour:
   m_Name: NpcText
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 11406440}
-  - {fileID: 11401570}
-  - {fileID: 11449022}
-  - {fileID: 11438424}
-  - {fileID: 11481562}
-  - {fileID: 11423710}
-  nextID: 6
---- !u!114 &11401570
+  - {fileID: 11497824}
+  - {fileID: 11464986}
+  nextID: 2
+--- !u!114 &11464986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -31,11 +27,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  x: 263
-  y: 276
-  text: dfghdfgh
-  childIDs: 0200000003000000
---- !u!114 &11406440
+  x: 383
+  y: 157
+  width: 250
+  height: 75
+  hideConditions: 0
+  hideText: 1
+  hideActions: 0
+  text: ~I Said GOOD DAY Sir!!
+  childIDs: 
+  conditions: 
+--- !u!114 &11497824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -47,77 +49,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  x: 45
-  y: 100
-  text: gfhd
+  x: 33
+  y: 157
+  width: 250
+  height: 75
+  hideConditions: 1
+  hideText: 1
+  hideActions: 0
+  text: '~Good DaySir!!
+
+    ~Welcome to our fine world.
+
+    ~Now here something new....
+
+    ~dfslkjsdlkjflsdkjflksdjlkdsfj'
   childIDs: 01000000
---- !u!114 &11423710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a681ca8b048d7a489ac5a498db1aa59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 5
-  x: 1131.7738
-  y: 88
-  text: gjhfgjhfg
-  childIDs: 
---- !u!114 &11438424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a681ca8b048d7a489ac5a498db1aa59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 3
-  x: 552
-  y: 333
-  text: Hello World.kjdflksdfjheloo moto
-  childIDs: 
---- !u!114 &11449022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a681ca8b048d7a489ac5a498db1aa59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 2
-  x: 575
-  y: 63
-  text: fghdfhdfhgzdfsdf
-  childIDs: 04000000
---- !u!114 &11481562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a681ca8b048d7a489ac5a498db1aa59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 4
-  x: 857.0147
-  y: 187
-  text: 'dffvgkjsdghsjkdh
-
-    saldklasjdlkjaskld
-
-    sadlkjaslkdjklasjdfddszfz
-
-    sjkadhjkashdjkas'
-  childIDs: 05000000
+  conditions: 

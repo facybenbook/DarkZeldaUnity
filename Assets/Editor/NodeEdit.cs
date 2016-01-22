@@ -15,6 +15,7 @@ public class NodeEdit : EditorWindow
     GameObject lastSelected;
 
     List<int> linkNodes;
+    List<int> unLinkNodes;
 
     public Vector2 scrollPosition;
 
@@ -29,17 +30,15 @@ public class NodeEdit : EditorWindow
     {
         linkNodes = new List<int>();
         dirtyList = new List<Node>();
+        unLinkNodes = new List<int>();
         if (nodeWindows == null)
             nodeWindows = new Dictionary<int, Rect>();
         if (NodeDict == null)
             NodeDict = new Dictionary<int, Node>();
         if (scrollPosition == null)
             scrollPosition = Vector2.zero;
-    }
 
-    void OnDisable()
-    {
-        AssetDatabase.SaveAssets();
+        InitConversation();
     }
 
     void OnGUI()
@@ -47,25 +46,33 @@ public class NodeEdit : EditorWindow
         if (Selection.activeGameObject == null)
             return;
 
-        if (lastSelected != Selection.activeGameObject)
-        {
-            InitConversation();
-        }
-
         if (npcText == null)
             return;
 
         if (linkNodes.Count == 2)
         {
             NodeDict[linkNodes[0]].childIDs.Add(linkNodes[1]);
-            linkNodes.Clear();
 
             if (!dirtyList.Contains(NodeDict[linkNodes[0]]))
             {
                 dirtyList.Add(NodeDict[linkNodes[0]]);
             }
+
+            linkNodes.Clear();
         }
 
+        if (unLinkNodes.Count == 2)
+        {
+            NodeDict[unLinkNodes[0]].childIDs.Remove(unLinkNodes[1]);
+
+            if (!dirtyList.Contains(NodeDict[unLinkNodes[0]]))
+            {
+                dirtyList.Add(NodeDict[unLinkNodes[0]]);
+            }
+
+            unLinkNodes.Clear();
+        }
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create Node"))
         {
             Node newNode = ScriptableObject.CreateInstance<Node>() as Node;
@@ -77,9 +84,12 @@ public class NodeEdit : EditorWindow
             newNode.x = scrollPosition.x;
             newNode.y = scrollPosition.y;
 
+            newNode.width = 250;
+            newNode.height = 75;
+
             npcText.conversation.nodes.Add(newNode);
             NodeDict.Add(newNode.id, newNode);
-            nodeWindows.Add(newNode.id, new Rect(newNode.x, newNode.y, 200, 250));
+            nodeWindows.Add(newNode.id, new Rect(newNode.x, newNode.y, newNode.width, newNode.height));
 
             AssetDatabase.SaveAssets();
         }
@@ -91,6 +101,7 @@ public class NodeEdit : EditorWindow
                 EditorUtility.SetDirty(dirtyList[i]);
             }
         }
+        EditorGUILayout.EndHorizontal();
 
         scrollPosition = GUI.BeginScrollView(new Rect(0, 0, position.width, position.height), scrollPosition, new Rect(0, 0, 5000, 5000), true, true);
         BeginWindows();
@@ -99,13 +110,15 @@ public class NodeEdit : EditorWindow
         {
             if (nodeWindows.ContainsKey(node.id))
             {
-                nodeWindows[node.id] = GUI.Window(node.id, nodeWindows[node.id], nodeGUI, node.id.ToString());
+                Rect newrect = GUILayout.Window(node.id, nodeWindows[node.id], nodeGUI, node.id.ToString());
+                nodeWindows[node.id] = new Rect(newrect.x, newrect.y, nodeWindows[node.id].width, nodeWindows[node.id].height);
             }
             foreach (int childID in node.childIDs)
             {
                 DrawNodeCurve(nodeWindows[node.id], nodeWindows[childID]);
             }
         }
+
         EndWindows();
         GUI.EndScrollView();
         AssetDatabase.SaveAssets();
@@ -130,9 +143,9 @@ public class NodeEdit : EditorWindow
     public void nodeGUI(int id)
     {
         bool dirty = false;
-
         Node node = NodeDict[id];
 
+        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Link"))
         {
             if (!linkNodes.Contains(id))
@@ -140,12 +153,45 @@ public class NodeEdit : EditorWindow
                 linkNodes.Add(id);
             }
         }
-
-        string newText = GUILayout.TextArea(node.text);
-        if (node.text != newText)
+        if (GUILayout.Button("UnLink"))
         {
-            node.text = newText;
-            dirty = true;
+            if (!unLinkNodes.Contains(id))
+            {
+                unLinkNodes.Add(id);
+            }
+        }
+        EditorGUILayout.EndHorizontal();
+
+        node.hideConditions = EditorGUILayout.Foldout(node.hideConditions, "Conditions");
+
+        if (node.hideConditions)
+        {
+            string newConditions = GUILayout.TextArea(node.conditions);
+
+            if (node.conditions != newConditions)
+            {
+                node.conditions = newConditions;
+                dirty = true;
+            }
+        }
+
+        node.hideText = EditorGUILayout.Foldout(node.hideText, "Text");
+
+         if (node.hideText)
+        {
+            string newText = GUILayout.TextArea(node.text);
+            if (node.text != newText)
+            {
+                node.text = newText;
+                dirty = true;
+            }
+        }
+
+        node.hideActions = EditorGUILayout.Foldout(node.hideActions, "Actions");
+
+        if (node.hideActions)
+        {
+            // display the nodes actions.
         }
 
         if (node.x != nodeWindows[id].position.x)
@@ -158,6 +204,18 @@ public class NodeEdit : EditorWindow
             node.y = nodeWindows[id].position.y;
             dirty = true;
         }
+        //if (node.width != nodeWindows[id].width)
+        //{
+        //    node.width = nodeWindows[id].width;
+        //    dirty = true;
+        //}
+        //if (node.height != nodeWindows[id].height)
+        //{
+        //    node.height = nodeWindows[id].height;
+        //    dirty = true;
+        //}
+
+
         if (dirty)
         {
             if (!dirtyList.Contains(node)) {
@@ -177,7 +235,9 @@ public class NodeEdit : EditorWindow
 
         if (npcText.conversation != null)
         {
-            Debug.Log("Conversation found.");
+            NodeDict.Clear();
+            nodeWindows.Clear();
+
             foreach (Node node in npcText.conversation.nodes)
             {
                 if (NodeDict.ContainsKey(node.id))
@@ -191,17 +251,25 @@ public class NodeEdit : EditorWindow
 
                 if (!nodeWindows.ContainsKey(node.id))
                 {
-                    nodeWindows.Add(node.id, new Rect(node.x, node.y, 200, 250));
+                    nodeWindows.Add(node.id, new Rect(node.x, node.y, node.width, node.height));
                 }
  
             }
         }
         else
         {
-            Debug.Log("No conversation asset.");
             npcText.conversation = ScriptableObject.CreateInstance<Conversation>();
             AssetDatabase.CreateAsset(npcText.conversation, "Assets/"+AssetDatabase.GenerateUniqueAssetPath(npcText.name + ".asset"));
             AssetDatabase.SaveAssets();
+        }
+    }
+
+    void OnSelectionChange ()
+    {
+        if (lastSelected != Selection.activeGameObject)
+        {
+            InitConversation();
+            Repaint();
         }
     }
 

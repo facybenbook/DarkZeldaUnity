@@ -38,10 +38,10 @@ public class TextboxManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Submit")&&!isActive)
-        {
-            ShowTextBox(textFile.text, true, false);
-        }
+        //if(Input.GetButtonDown("Submit")&&!isActive)
+        //{
+        //    ShowTextBox(textFile.text, true, false);
+        //}
 
 
 
