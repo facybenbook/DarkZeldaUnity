@@ -4,14 +4,26 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Node : ScriptableObject {
 
-    int id;
-    string text;
-    List<int> childIDs;
+    public int id;
 
-    public void OnGUI ()
+    public float x;
+    public float y;
+    public string text;
+    public List<int> childIDs;
+
+    void OnEnable()
     {
-        GUILayout.Label(id.ToString());
-        text = GUILayout.TextArea(text);
+        if (childIDs == null)
+        {
+            childIDs = new List<int>();
+        }
+
+        if (text == null)
+        {
+            text = "";
+        }
+
+        //hideFlags = HideFlags.HideInHierarchy;
     }
 
 }

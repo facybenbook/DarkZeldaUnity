@@ -6,9 +6,11 @@ using System.Collections.Generic;
 public class NodeEditor : EditorWindow
 {
 
-    List<Rect> windows = new List<Rect>();
-    List<int> windowsToAttach = new List<int>();
-    List<int> attachedWindows = new List<int>();
+    List<Rect> windows = new List<Rect>();// window positions/id-index
+    List<int> windowsToAttach = new List<int>();// linker list 
+    List<int> attachedWindows = new List<int>();//child list
+
+    public Vector2 scrollPosition;
 
     [MenuItem("Window/Node editor")]
     static void ShowEditor()
@@ -33,8 +35,9 @@ public class NodeEditor : EditorWindow
                 DrawNodeCurve(windows[attachedWindows[i]], windows[attachedWindows[i + 1]]);
             }
         }
-
         BeginWindows();
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+        
 
         if (GUILayout.Button("Create Node"))
         {
@@ -46,6 +49,8 @@ public class NodeEditor : EditorWindow
             windows[i] = GUI.Window(i, windows[i], DrawNodeWindow, "Window " + i);
         }
 
+        
+        GUILayout.EndScrollView();
         EndWindows();
     }
 
