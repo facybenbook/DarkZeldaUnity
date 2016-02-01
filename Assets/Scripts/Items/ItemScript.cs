@@ -7,5 +7,4 @@ public class ItemScript : MonoBehaviour {
     {
         print("Base Item script Called.");
     }
-
 }

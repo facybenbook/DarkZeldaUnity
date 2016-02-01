@@ -16,8 +16,15 @@ public class Node : ScriptableObject {
     public bool hideActions = false;
 
     public string text;
+
     public List<int> childIDs;
+
     public string conditions;
+
+    public List<NpcAction> actionNames;
+    public List<string> actionParams;
+
+    public int lastparentID;
 
     void OnEnable()
     {
@@ -32,6 +39,14 @@ public class Node : ScriptableObject {
         if (text == null)
         {
             text = "";
+        }
+        if (actionNames == null)
+        {
+            actionNames = new List<NpcAction>();
+        }
+        if (actionParams == null)
+        {
+            actionParams = new List<string>();
         }
 
         //hideFlags = HideFlags.HideInHierarchy;

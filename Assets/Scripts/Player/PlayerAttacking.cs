@@ -11,10 +11,12 @@ public class PlayerAttacking : MonoBehaviour {
     public Object item1Script;
     public GameObject item2;
     public Object item2Script;
+    private Pause pauseScript;
 
 	// Use this for initialization
 	void Start () {
         UI = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
+        pauseScript = FindObjectOfType<Pause>();
 
         inventory = gameObject.GetComponent<Inventory>();
         fire1 = 0;
@@ -25,9 +27,14 @@ public class PlayerAttacking : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if(pauseScript.paused)
+        {
+            return;
+        }
+
         if (UI.MenuOpen == false)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonUp("Fire1"))
             {
                 //inventory.useItem(fire1);
                 if (item1)

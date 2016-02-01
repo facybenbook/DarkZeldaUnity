@@ -42,6 +42,18 @@ public class GameProgress : MonoBehaviour
         return false;
     }
 
+    public void Remove(string eventName)
+    {
+        if (currentEvents.Contains(eventName))
+        {
+            currentEvents.Remove(eventName);
+        }
+        if (completedEvents.Contains(eventName))
+        {
+            completedEvents.Remove(eventName);
+        }
+    }
+
     void Start()
     {
         //string name = "Game Start";

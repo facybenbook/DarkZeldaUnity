@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Fungus;
 
 public class CameraController : MonoBehaviour {
 
@@ -19,9 +20,11 @@ public class CameraController : MonoBehaviour {
     public float maxX;
     public float minY;
     public float maxY;
+    private GameObject textbox;
 
     // Use this for initialization
     void Start () {
+        textbox = GameObject.FindGameObjectWithTag("Textbox");
 
         DontDestroyOnLoad(transform.gameObject);
 
@@ -45,20 +48,26 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 
-        if(cam.orthographicSize != targetSize)
-        {
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, zoomSpd*Time.deltaTime);
-
-            verExtent = cam.orthographicSize;
-            horExtent = verExtent * Screen.width / Screen.height;
-        }
         if(camTarget != null)
         {
             targetPos = new Vector3(camTarget.transform.position.x, camTarget.transform.position.y, -10);
             targetPos.x = Mathf.Clamp(targetPos.x, minX+horExtent, maxX-horExtent);
             targetPos.y = Mathf.Clamp(targetPos.y, minY+verExtent, maxY-verExtent);
         }
-        
+
+        if (textbox.activeInHierarchy)
+        {
+            return;
+        }
+
+
+        if (cam.orthographicSize != targetSize)
+        {
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, zoomSpd * Time.deltaTime);
+
+            verExtent = cam.orthographicSize;
+            horExtent = verExtent * Screen.width / Screen.height;
+        }
 
         transform.position = Vector3.Lerp(transform.position, targetPos, moveSpd * Time.deltaTime);
 

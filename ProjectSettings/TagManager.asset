@@ -8,6 +8,8 @@ TagManager:
   - GameManager
   - Npc
   - Enemy
+  - Textbox
+  - PlayerGhost
   layers:
   - Default
   - TransparentFX

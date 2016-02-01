@@ -9,6 +9,8 @@ public class PlayerAnimationManager : MonoBehaviour {
     public bool isAttacking;
     public GameObject imagePoint;
 
+    private Pause pauseScript;
+
     float FloorOrCeil (float val)
     {
         if(val > 0)
@@ -24,10 +26,19 @@ public class PlayerAnimationManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
+        pauseScript = FindObjectOfType<Pause>();
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if(pauseScript.paused)
+        {
+            anim.SetFloat("curX", 0f);
+            anim.SetFloat("curY", 0f);
+            anim.SetBool("isMoving", false);
+            return;
+        }
+
 
         anim.SetFloat("curX", Input.GetAxis("Horizontal"));
         anim.SetFloat("curY", Input.GetAxis("Vertical"));

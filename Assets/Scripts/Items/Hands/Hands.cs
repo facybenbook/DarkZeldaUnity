@@ -85,6 +85,6 @@ public class Hands : ItemScript
     public override void Use()
     {
         playerAnimator.SetTrigger("isAttacking");
-        timer = 0.05f;
+        timer = 0.2f;
     }
 }

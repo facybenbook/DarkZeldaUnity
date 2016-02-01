@@ -1912,7 +1912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b1d8af08a70304595b6c6d1e517ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversation: {fileID: 11400000, guid: 15e4cb7c82101d54aa78d7848366acaa, type: 2}
+  conversation: {fileID: 11400000, guid: 0b2bab460059c2e428a0744256a22831, type: 2}
   nodeIndex: 0
 --- !u!58 &2074881536
 CircleCollider2D:
