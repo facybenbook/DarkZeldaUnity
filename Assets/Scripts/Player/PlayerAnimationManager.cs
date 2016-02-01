@@ -8,8 +8,10 @@ public class PlayerAnimationManager : MonoBehaviour {
     public Rigidbody2D player;
     public bool isAttacking;
     public GameObject imagePoint;
+    public bool lockDirWhenAttacking;
 
     private Pause pauseScript;
+    private float lockTimer;
 
     float FloorOrCeil (float val)
     {
@@ -39,7 +41,33 @@ public class PlayerAnimationManager : MonoBehaviour {
             return;
         }
 
+        if (player.velocity.magnitude == 0)
+        {
+            anim.SetBool("isMoving", false);
+        }
+        else
+        {
+            anim.SetBool("isMoving", true);
+        }
 
+        if (isAttacking)
+        {
+            anim.SetTrigger("isAttacking");
+            isAttacking = false;
+        }
+
+        if (lockDirWhenAttacking && (Input.GetButton("Fire1") || Input.GetButton("Fire2")))
+        {
+            lockTimer = 0.25f;
+        }
+        if(lockTimer > 0)
+        {
+            lockTimer -= Time.deltaTime;
+            return;
+        } else
+        {
+            lockTimer = 0f;
+        }
         anim.SetFloat("curX", Input.GetAxis("Horizontal"));
         anim.SetFloat("curY", Input.GetAxis("Vertical"));
 
@@ -56,21 +84,6 @@ public class PlayerAnimationManager : MonoBehaviour {
                 anim.SetFloat("lastX", 0f);
                 anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("Vertical")));
             }
-        }
-
-        if (player.velocity.magnitude == 0)
-        {
-            anim.SetBool("isMoving", false);
-        }
-        else
-        {
-            anim.SetBool("isMoving", true);
-        }
-
-        if (isAttacking)
-        {
-            anim.SetTrigger("isAttacking");
-            isAttacking = false;
         }
 
         imagePoint.transform.position = player.transform.position + new Vector3(anim.GetFloat("lastX"), anim.GetFloat("lastY")).normalized/2;
