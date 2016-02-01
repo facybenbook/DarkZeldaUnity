@@ -27,7 +27,7 @@ public class HurtPlayerOnTouch : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.name == "Player")
+        if(other.gameObject.tag == "Player")
         {
             if(knockback > 0)
             {
@@ -43,6 +43,33 @@ public class HurtPlayerOnTouch : MonoBehaviour {
             {
                 PlayerController pc = other.gameObject.GetComponent<PlayerController>();
                 if(pc != null)
+                {
+                    pc.stunTimer = stunLock;
+                }
+            }
+            Debug.Log("Player Hit");
+            cam.Shake(0.1f, 0.2f);
+
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            if (knockback > 0)
+            {
+                Rigidbody2D player = other.gameObject.GetComponent<Rigidbody2D>();
+                player.velocity = (player.transform.position - gameObject.transform.position) * (knockback + Random.Range(-knockbackRandomness, knockbackRandomness));
+            }
+            HealthController playerHpCon = other.gameObject.GetComponent<HealthController>();
+            if (playerHpCon != null)
+            {
+                playerHpCon.ChangeHealth(dmg);
+            }
+            if (stunLock > 0)
+            {
+                PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+                if (pc != null)
                 {
                     pc.stunTimer = stunLock;
                 }
