@@ -3067,6 +3067,7 @@ GameObject:
   - 212: {fileID: 1483665302}
   - 95: {fileID: 1483665305}
   - 114: {fileID: 1483665301}
+  - 114: {fileID: 1483665304}
   m_Layer: 0
   m_Name: GhostParticle
   m_TagString: PlayerGhost
@@ -3086,8 +3087,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  target: {fileID: 0}
-  targetPos: {x: 0, y: 0}
 --- !u!212 &1483665302
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3130,6 +3129,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+--- !u!114 &1483665304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1483665300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3246702a931b12c4f89a781e66a47340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1483665305
 Animator:
   serializedVersion: 3

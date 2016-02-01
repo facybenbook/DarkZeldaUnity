@@ -9,45 +9,34 @@ using BehaviorLibrary.Components.Decorators;
 
 public class PlayerGhostBehaviour : MonoBehaviour {
 
-    GameObject player;
     public float speed;
-    public GameObject target;
-    public Vector2 targetPos;
 
+    public BlackBoard Memory;
     BehaviorLibrary.Behavior behaviour;
 
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        Memory = new BlackBoard();
 
-        Sequence stayCloseToPlayer = new Sequence(
-            new BehaviorLibrary.Components.BehaviorComponent[]
-            {
-                new Inverter(new Conditional(isCloseToPlayer)),
-                new BehaviorAction(moveToPlayer)
+        Memory.Set<GameObject>("Player", GameObject.FindGameObjectWithTag("Player"));
 
-            });
+        Conditional playerClose = new Conditional(isCloseToPlayer);
+        Conditional playerMoving = new Conditional(isPlayerMoving);
 
-        Sequence WanderAroundPlayer = new Sequence
-            (
-            new Selector 
-                (
-                new Sequence(
-                    new Conditional(isAtTargetPos),
-                    new BehaviorAction(SetRandomPosAroundPlayer)),
-                new BehaviorAction(moveToTargetPos)
-                )
+        BehaviorAction MoveToPlayer = new BehaviorAction(moveToPlayer);
+        BehaviorAction WanderAroundPlayer = new BehaviorAction(wanderAroundPlayer);
+
+        Selector stayCloseToPlayer = new Selector(
+
+            new Sequence(
+                new Inverter(playerClose),
+                playerMoving,
+                MoveToPlayer                
+                ),
+            WanderAroundPlayer
             );
 
-        Selector moveAndWander = new Selector(
-            new BehaviorLibrary.Components.BehaviorComponent[]
-            {
-                stayCloseToPlayer,
-                WanderAroundPlayer
-            });
-
-        behaviour = new BehaviorLibrary.Behavior(WanderAroundPlayer);
-        behaviour.Behave();
+        behaviour = new BehaviorLibrary.Behavior(stayCloseToPlayer);
 	
 	}
 	
@@ -59,6 +48,8 @@ public class PlayerGhostBehaviour : MonoBehaviour {
 
     bool isCloseToPlayer ()
     {
+        GameObject player = Memory.Get<GameObject>("Player");
+
         if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 2)
         {
             return true;
@@ -66,40 +57,62 @@ public class PlayerGhostBehaviour : MonoBehaviour {
         return false;
     }
 
+    bool isPlayerMoving ()
+    {
+        GameObject player = Memory.Get<GameObject>("Player");
+
+        return player.GetComponent<Rigidbody2D>().velocity != Vector2.zero;
+    }
+
     BehaviorReturnCode moveToPlayer ()
     {
-        if (!isCloseToPlayer())
-        {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position, speed * Time.deltaTime);
-            return BehaviorReturnCode.Running;
-        }
+        GameObject player = Memory.Get<GameObject>("Player");
+
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position, speed * Time.deltaTime);
         return BehaviorReturnCode.Success;
         
 
     }
 
-    BehaviorReturnCode moveToTargetPos ()
+    BehaviorReturnCode wanderAroundPlayer ()
     {
+        Vector2 targetPos;
+        Vector3 playerPos = Memory.Get<GameObject>("Player").transform.position;
+
+        if (Memory.Contains("targetPos"))
+        {
+            targetPos = Memory.Get<Vector2>("targetPos");
+        }
+        else
+        {
+            targetPos = Random.insideUnitSphere;
+
+            Memory.Set<Vector2>("targetPos", targetPos);
+        }
+
+
         if (!isAtTargetPos())
         {
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPos, speed * Time.deltaTime);
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPos + new Vector2(playerPos.x, playerPos.y), speed * Time.deltaTime);
             return BehaviorReturnCode.Running;
         }
-        return BehaviorReturnCode.Success;
-    }
-
-    BehaviorReturnCode SetRandomPosAroundPlayer ()
-    {
-        targetPos = Random.insideUnitSphere + player.transform.position;
-        return BehaviorReturnCode.Success;
+        else
+        {
+            Memory.Remove("targetPos");
+            return BehaviorReturnCode.Success;
+        }
     }
 
     bool isAtTargetPos ()
     {
-        if (Vector3.Distance(gameObject.transform.position, targetPos) < 0.1)
+        Vector2 targetPos = Memory.Get<Vector2>("targetPos");
+        Vector3 playerPos = Memory.Get<GameObject>("Player").transform.position;
+
+        if (Vector3.Distance(gameObject.transform.position, targetPos + new Vector2(playerPos.x, playerPos.y)) < 0.1)
         {
             return true;
         }
         return false;
     }
+
 }
