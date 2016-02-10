@@ -7,6 +7,7 @@ public class SpikeTrap : MonoBehaviour {
     public float timeToActivate;
     public float timeBetweenActivation;
     public float timeRandomness;
+    public float startDelay;
 
     private float timer;
     private Pause pauseScript;
@@ -17,7 +18,7 @@ public class SpikeTrap : MonoBehaviour {
 	void Start () {
         pauseScript = FindObjectOfType<Pause>();
         anim = GetComponent<Animator>();
-        timer = timeBetweenActivation + Random.Range(-timeRandomness, timeRandomness);
+        timer = startDelay;
 
     }
 	

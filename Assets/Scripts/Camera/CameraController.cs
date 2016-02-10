@@ -51,8 +51,8 @@ public class CameraController : MonoBehaviour {
         if(camTarget != null)
         {
             targetPos = new Vector3(camTarget.transform.position.x, camTarget.transform.position.y, -10);
-            targetPos.x = Mathf.Clamp(targetPos.x, minX+horExtent, maxX-horExtent);
-            targetPos.y = Mathf.Clamp(targetPos.y, minY+verExtent, maxY-verExtent);
+            targetPos.x = ( Mathf.Clamp(targetPos.x, minX+horExtent, maxX-horExtent) );
+            targetPos.y = ( Mathf.Clamp(targetPos.y, minY+verExtent, maxY-verExtent) );
         }
 
         if (textbox.activeInHierarchy)
@@ -68,7 +68,6 @@ public class CameraController : MonoBehaviour {
             verExtent = cam.orthographicSize;
             horExtent = verExtent * Screen.width / Screen.height;
         }
-
         transform.position = Vector3.Lerp(transform.position, targetPos, moveSpd * Time.deltaTime);
 
     }

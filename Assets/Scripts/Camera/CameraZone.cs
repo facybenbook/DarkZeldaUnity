@@ -5,7 +5,10 @@ public class CameraZone : MonoBehaviour {
 
     public float camOrthoSize;
 
+    public string location;
+
     private CameraController cam;
+    private PlayerLocation playerLocation;
 
     private float minX;
     private float maxX;
@@ -18,6 +21,7 @@ public class CameraZone : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = FindObjectOfType<CameraController>();
+        playerLocation = FindObjectOfType<PlayerLocation>();
 
         camZone = GetComponent<BoxCollider2D>();
 
@@ -39,6 +43,11 @@ public class CameraZone : MonoBehaviour {
         {
             cam.SetMinMax(minX,maxX,minY,maxY);
             cam.SetBaseOrthoSize(camOrthoSize);
+
+            if(location != null)
+            {
+                playerLocation.SetLocation(location);
+            }
         }
     }
 }

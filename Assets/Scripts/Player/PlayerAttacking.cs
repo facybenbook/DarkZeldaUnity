@@ -12,6 +12,7 @@ public class PlayerAttacking : MonoBehaviour {
     public GameObject item2;
     public Object item2Script;
     private Pause pauseScript;
+    public float attackDelay;
 
 	// Use this for initialization
 	void Start () {
@@ -32,22 +33,33 @@ public class PlayerAttacking : MonoBehaviour {
             return;
         }
 
+        if(attackDelay > 0)
+        {
+            attackDelay -= Time.deltaTime;
+        } else
+        {
+            attackDelay = 0f;
+        }
+
         if (UI.MenuOpen == false)
         {
-            if (Input.GetButtonUp("Fire1"))
+            if (attackDelay <= 0)
             {
-                //inventory.useItem(fire1);
-                if (item1)
+                if (Input.GetButtonUp("Fire1"))
                 {
-                    item1Script.GetType().GetMethod("Use").Invoke(item1Script, null);
+                    //inventory.useItem(fire1);
+                    if (item1)
+                    {
+                        item1Script.GetType().GetMethod("Use").Invoke(item1Script, null);
+                    }
                 }
-            }
-            if (Input.GetButtonDown("Fire2"))
-            {
-                //inventory.useItem(fire2);
-                if(item2)
+                if (Input.GetButtonDown("Fire2"))
                 {
-                    item2Script.GetType().GetMethod("Use").Invoke(item2Script, null);
+                    //inventory.useItem(fire2);
+                    if (item2)
+                    {
+                        item2Script.GetType().GetMethod("Use").Invoke(item2Script, null);
+                    }
                 }
             }
         }

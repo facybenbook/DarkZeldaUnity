@@ -8,6 +8,8 @@ public class HurtPlayerOnTouch : MonoBehaviour {
     public float knockback;
     public float knockbackRandomness;
     public float stunLock;
+    public bool destroyAfter;
+    public GameObject particleWhenDestroyed;
 
     private CameraShake cam;
     private Collider col;
@@ -29,54 +31,76 @@ public class HurtPlayerOnTouch : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            if(knockback > 0)
-            {
-                Rigidbody2D player = other.gameObject.GetComponent<Rigidbody2D>();
-                player.velocity = (player.transform.position - gameObject.transform.position) * (knockback + Random.Range(-knockbackRandomness, knockbackRandomness));
-            }
             HealthController playerHpCon = other.gameObject.GetComponent<HealthController>();
-            if(playerHpCon != null)
+            if (playerHpCon != null && playerHpCon.timer <= 0)
             {
                 playerHpCon.ChangeHealth(dmg);
-            }
-            if(stunLock > 0)
-            {
-                PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-                if(pc != null)
+
+                if (knockback > 0)
                 {
-                    pc.stunTimer = stunLock;
+                    Rigidbody2D player = other.gameObject.GetComponent<Rigidbody2D>();
+                    player.velocity = (player.transform.position - gameObject.transform.position) * (knockback + Random.Range(-knockbackRandomness, knockbackRandomness));
+                }
+                if (stunLock > 0)
+                {
+                    PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+                    if (pc != null)
+                    {
+                        pc.stunTimer = stunLock;
+                    }
+                }
+
+                Debug.Log("Player Hit");
+                cam.Shake(0.1f, 0.2f);
+
+                if (destroyAfter)
+                {
+                    DestroyObject();
                 }
             }
-            Debug.Log("Player Hit");
-            cam.Shake(0.1f, 0.2f);
-
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            if (knockback > 0)
-            {
-                Rigidbody2D player = other.gameObject.GetComponent<Rigidbody2D>();
-                player.velocity = (player.transform.position - gameObject.transform.position) * (knockback + Random.Range(-knockbackRandomness, knockbackRandomness));
-            }
             HealthController playerHpCon = other.gameObject.GetComponent<HealthController>();
-            if (playerHpCon != null)
+            if (playerHpCon != null && playerHpCon.timer <= 0)
             {
                 playerHpCon.ChangeHealth(dmg);
-            }
-            if (stunLock > 0)
-            {
-                PlayerController pc = other.gameObject.GetComponent<PlayerController>();
-                if (pc != null)
+
+                if (knockback > 0)
                 {
-                    pc.stunTimer = stunLock;
+                    Rigidbody2D player = other.gameObject.GetComponent<Rigidbody2D>();
+                    player.velocity = (player.transform.position - gameObject.transform.position) * (knockback + Random.Range(-knockbackRandomness, knockbackRandomness));
+                }
+                if (stunLock > 0)
+                {
+                    PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+                    if (pc != null)
+                    {
+                        pc.stunTimer = stunLock;
+                    }
+                }
+
+                Debug.Log("Player Hit");
+                cam.Shake(0.1f, 0.2f);
+
+                if (destroyAfter)
+                {
+                    DestroyObject();
                 }
             }
-            Debug.Log("Player Hit");
-            cam.Shake(0.1f, 0.2f);
-
         }
+    }
+
+    void DestroyObject()
+    {
+        if(particleWhenDestroyed != null)
+        {
+            Instantiate(particleWhenDestroyed, gameObject.transform.position, gameObject.transform.rotation);
+        }
+
+        Destroy(gameObject);
     }
 }
