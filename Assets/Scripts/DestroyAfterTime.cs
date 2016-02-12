@@ -4,11 +4,13 @@ using System.Collections;
 public class DestroyAfterTime : MonoBehaviour {
 
     public float timer;
+    public float randomness;
 
     public GameObject particleWhenDestroyed;
 
     // Use this for initialization
     void Start () {
+        timer += Random.Range(-randomness, randomness);
 	
 	}
 	

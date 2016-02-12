@@ -8,6 +8,10 @@ public class UIManager : MonoBehaviour {
     [HideInInspector]
     public bool MenuOpen;
 
+    Pause pauseScript;
+    GameObject textbox;
+    
+
     Transform _ActiveMenu;
     public string ActiveMenu
     {
@@ -35,12 +39,14 @@ public class UIManager : MonoBehaviour {
     {
         UiRoot = GameObject.Find("Canvas");
         DontDestroyOnLoad(UiRoot);
+        pauseScript = FindObjectOfType<Pause>();
+        textbox = GameObject.FindGameObjectWithTag("Textbox");
 
         ActiveMenu = defaultMenu;
     }
 	
 	void LateUpdate () {
-        if (Input.GetButtonUp("Submit"))
+        if (Input.GetButtonUp("Submit") && !textbox.activeInHierarchy)
         {
             MenuOpen = !MenuOpen;
 
@@ -55,11 +61,13 @@ public class UIManager : MonoBehaviour {
 
                 _ActiveMenu.gameObject.SetActive(true);
                 output = " Menu Opened";
+                pauseScript.PauseGame(true);
             }
             else
             {
                 _ActiveMenu.gameObject.SetActive(false);
                 output = " Menu Closed";
+                pauseScript.PauseGame(false);
             }
             print(ActiveMenu + output);
         }

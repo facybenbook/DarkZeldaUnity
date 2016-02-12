@@ -37,7 +37,7 @@ public class CallFungusBlock : MonoBehaviour
                 textboxActive = textbox.activeInHierarchy;
             }
 
-            if ((textbox == null || !textboxActive) && Input.GetButtonDown("Interact"))
+            if ((textbox == null || !textboxActive) && Input.GetButtonDown("Interact") && pauseScript.paused == false)
             {
                 //flowchart.ExecuteBlock(blockToCall);
                 buttonPressed = true;

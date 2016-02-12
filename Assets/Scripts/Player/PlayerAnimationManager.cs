@@ -29,6 +29,8 @@ public class PlayerAnimationManager : MonoBehaviour {
 	void Start () {
         anim = GetComponent<Animator>();
         pauseScript = FindObjectOfType<Pause>();
+        anim.SetFloat("lastY", -1f);
+        anim.SetFloat("lastX", 0f);
     }
 	
 	// Update is called once per frame

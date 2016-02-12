@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
             stunTimer = 0;
             if (pauseScript.paused)
             {
+                player.velocity = Vector2.zero;
                 return;
             }
             if(attackScript.attackDelay <= 0)

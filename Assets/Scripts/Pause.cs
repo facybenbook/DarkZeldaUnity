@@ -32,11 +32,9 @@ public class Pause : MonoBehaviour {
         paused = !paused;
         if(paused)
         {
-            //Time.timeScale = 0f;
         }
         else
         {
-            //Time.timeScale = 1f;
         }
     }
 
@@ -45,7 +43,6 @@ public class Pause : MonoBehaviour {
         if(flag)
         {
             paused = true;
-            //Time.timeScale = 0f;
         }
         else
         {
@@ -53,7 +50,6 @@ public class Pause : MonoBehaviour {
             if (!textbox.activeInHierarchy)
             {
                 paused = false;
-                //Time.timeScale = 1f;
             }
         }
     }
