@@ -45,7 +45,7 @@ public class PlayerAttacking : MonoBehaviour {
         {
             if (attackDelay <= 0)
             {
-                if (Input.GetButtonUp("Fire1"))
+                if (Input.GetButtonDown("Fire1"))
                 {
                     //inventory.useItem(fire1);
                     if (item1)
@@ -53,6 +53,7 @@ public class PlayerAttacking : MonoBehaviour {
                         item1Script.GetType().GetMethod("Use").Invoke(item1Script, null);
                     }
                 }
+
                 if (Input.GetButtonDown("Fire2"))
                 {
                     //inventory.useItem(fire2);
@@ -61,6 +62,8 @@ public class PlayerAttacking : MonoBehaviour {
                         item2Script.GetType().GetMethod("Use").Invoke(item2Script, null);
                     }
                 }
+
+
             }
         }
     }

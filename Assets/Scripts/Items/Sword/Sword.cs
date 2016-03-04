@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Hands : ItemScript
+public class Sword : ItemScript
 {
 
     public int damage;
@@ -33,11 +33,11 @@ public class Hands : ItemScript
 
         playerAtkScript = player.GetComponent<PlayerAttacking>();
 
-        damage = -1;
+        damage = -2;
         knockback = 8f;
         stun = 0.5f;
-        attackDelay = 0.25f;
-        attackHash = Animator.StringToHash("Base Layer.Attack");
+        attackDelay = 0.35f;
+        attackHash = Animator.StringToHash("Base Layer.SwordAttack");
 
 
     }
@@ -95,7 +95,7 @@ public class Hands : ItemScript
 
     public override void Use()
     {
-        playerAnimator.SetTrigger("isAttacking");
+        playerAnimator.SetTrigger("Sword");
         timer = 0.2f;
         playerAtkScript.attackDelay = attackDelay;
     }

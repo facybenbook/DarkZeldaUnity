@@ -52,41 +52,49 @@ public class PlayerAnimationManager : MonoBehaviour {
             anim.SetBool("isMoving", true);
         }
 
-        if (isAttacking)
+        if(Input.GetButtonDown("Fire1")  || Input.GetButtonDown("Fire2"))
         {
-            anim.SetTrigger("isAttacking");
-            isAttacking = false;
+            lockTimer = 0.15f;
         }
 
-        if (lockDirWhenAttacking && (Input.GetButton("Fire1") || Input.GetButton("Fire2")))
+        if(lockTimer <= 0)
         {
-            lockTimer = 0.25f;
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                if (Mathf.Abs(Input.GetAxis("Horizontal")) > Mathf.Abs(Input.GetAxis("Vertical")))
+                {
+                    anim.SetFloat("lastX", FloorOrCeil(Input.GetAxis("Horizontal")));
+                    anim.SetFloat("lastY", 0f);
+                }
+                else
+                {
+                    anim.SetFloat("lastX", 0f);
+                    anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("Vertical")));
+                }
+            }
+            if (Input.GetAxis("LookX") != 0 || Input.GetAxis("LookY") != 0)
+            {
+
+                if (Mathf.Abs(Input.GetAxis("LookX")) > Mathf.Abs(Input.GetAxis("LookY")))
+                {
+                    anim.SetFloat("lastX", FloorOrCeil(Input.GetAxis("LookX")));
+                    anim.SetFloat("lastY", 0f);
+                }
+                else
+                {
+                    anim.SetFloat("lastX", 0f);
+                    anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("LookY")));
+                }
+            }
         }
-        if(lockTimer > 0)
+        else
         {
             lockTimer -= Time.deltaTime;
-            return;
-        } else
-        {
-            lockTimer = 0f;
         }
-        anim.SetFloat("curX", Input.GetAxis("Horizontal"));
-        anim.SetFloat("curY", Input.GetAxis("Vertical"));
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-        {
 
-            if(Mathf.Abs(Input.GetAxis("Horizontal")) > Mathf.Abs(Input.GetAxis("Vertical")))
-            {
-                anim.SetFloat("lastX", FloorOrCeil(Input.GetAxis("Horizontal")));
-                anim.SetFloat("lastY", 0f);
-            }
-            else
-            {
-                anim.SetFloat("lastX", 0f);
-                anim.SetFloat("lastY", FloorOrCeil(Input.GetAxis("Vertical")));
-            }
-        }
+        //anim.SetFloat("curX", Input.GetAxis("Horizontal"));
+        //anim.SetFloat("curY", Input.GetAxis("Vertical"));
 
         imagePoint.transform.position = player.transform.position + new Vector3(anim.GetFloat("lastX"), anim.GetFloat("lastY")).normalized/2;
     }

@@ -32,7 +32,7 @@ public class HealthController : MonoBehaviour {
             }
 
             Destroy(gameObject);
-            cam.Shake(0.1f, 0.2f);
+            //cam.Shake(0.1f, 0.2f);
         }
         if(timer > 0)
         {

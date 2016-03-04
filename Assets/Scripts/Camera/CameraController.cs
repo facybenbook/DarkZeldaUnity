@@ -21,10 +21,12 @@ public class CameraController : MonoBehaviour {
     public float minY;
     public float maxY;
     private GameObject textbox;
+    private Pause pauseScript;
 
     // Use this for initialization
     void Start () {
         textbox = GameObject.FindGameObjectWithTag("Textbox");
+        pauseScript = FindObjectOfType<Pause>();
 
         DontDestroyOnLoad(transform.gameObject);
 
@@ -47,12 +49,18 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
+        if(pauseScript.paused)
+        {
+            return;
+        }
 
-        if(camTarget != null)
+        if (camTarget != null)
         {
             targetPos = new Vector3(camTarget.transform.position.x, camTarget.transform.position.y, -10);
             targetPos.x = ( Mathf.Clamp(targetPos.x, minX+horExtent, maxX-horExtent) );
             targetPos.y = ( Mathf.Clamp(targetPos.y, minY+verExtent, maxY-verExtent) );
+            //targetPos.x = (Mathf.Clamp(targetPos.x + Input.GetAxis("LookX"), minX + horExtent, maxX - horExtent));
+            //targetPos.y = (Mathf.Clamp(targetPos.y + Input.GetAxis("LookY"), minY + verExtent, maxY - verExtent));
         }
 
         if (textbox.activeInHierarchy)

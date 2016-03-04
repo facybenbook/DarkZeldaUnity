@@ -44,7 +44,6 @@ public class InventoryUIManager : MonoBehaviour
                 Sprite icon = inventory.items[i].uiTexture;
                 inventorySlot.GetComponent<Image>().overrideSprite = icon;
             }
-            break;
         }
     }
 }

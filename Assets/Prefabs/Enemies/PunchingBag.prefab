@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.55, y: -6.38, z: 0}
+  m_LocalPosition: {x: 13.46, y: 7.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fb7f81e7ed2714bbb7a3cabd4151c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 99
-  MaxHp: 99
+  Hp: 25
+  MaxHp: 25
   invincabilityDelay: 1
   timer: 0
   particleWhenDestoyed: {fileID: 0}
@@ -127,6 +127,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunTimer: 0
   flipSpriteBasedOnVelX: 0
+  enemySightRange: 0
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  sightLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  cardinalDirSightLock: 0
+  sightToPlayer: 0
 --- !u!212 &21287670
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -20,8 +20,22 @@ public class DestroyOnCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Instantiate(particleWhenDestroyed, gameObject.transform.position, gameObject.transform.rotation);
+        if (particleWhenDestroyed != null)
+        {
+            Instantiate(particleWhenDestroyed, gameObject.transform.position, gameObject.transform.rotation);
+        }
         Destroy(gameObject);
+        Debug.Log(other.gameObject.name);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(particleWhenDestroyed != null)
+        {
+            Instantiate(particleWhenDestroyed, gameObject.transform.position, gameObject.transform.rotation);
+        }
+        Destroy(gameObject);
+
+        Debug.Log(other.gameObject.name);
     }
 
 }

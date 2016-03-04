@@ -7,6 +7,7 @@ public class SelectorControler : MonoBehaviour {
     RectTransform rectTransform;
     int cIndex = 0;
     PlayerAttacking playerAttack;
+    bool movedMenuPos;
 
     Inventory inv;
 
@@ -31,7 +32,12 @@ public class SelectorControler : MonoBehaviour {
 
     void Update ()
     {
-        if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+        if(Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        {
+            movedMenuPos = false;
+        }
+
+        if ((Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 || Mathf.RoundToInt(Input.GetAxisRaw("Vertical")) != 0) && !movedMenuPos)
         {
             int nindex = cIndex + Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
             nindex += Mathf.RoundToInt(-Input.GetAxisRaw("Vertical")) * 4;
@@ -41,8 +47,8 @@ public class SelectorControler : MonoBehaviour {
                 cIndex = nindex;
                 setPosition(cIndex);
             }
+            movedMenuPos = true;
         }
-
         if(Input.GetButtonDown("Fire1"))
         {
             if (cIndex <= inv.items.Count - 1)

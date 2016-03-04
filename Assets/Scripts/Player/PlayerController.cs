@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
                 player.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized * moveSpd;
             } else
             {
-                player.velocity = Vector3.Lerp(player.velocity, Vector3.zero, 0.2f);
+                player.velocity = Vector3.Lerp(player.velocity, Vector3.zero, 0.1f);
             }
         }
 

@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 469274}
   - 61: {fileID: 6183168}
   - 114: {fileID: 11421918}
-  m_Layer: 0
+  - 114: {fileID: 11468626}
+  m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +30,7 @@ GameObject:
   - 61: {fileID: 6116380}
   - 95: {fileID: 9562926}
   - 114: {fileID: 11480898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpikeTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +124,23 @@ MonoBehaviour:
   stunLock: 0.25
   destroyAfter: 0
   particleWhenDestroyed: {fileID: 0}
+--- !u!114 &11468626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301082911868423489fb96b6ba9a40b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: -1
+  knockback: 7
+  knockbackRandomness: 4
+  stunLock: 0.25
+  destroyAfter: 0
+  particleWhenDestroyed: {fileID: 0}
 --- !u!114 &11480898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +198,26 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 37c0585e59a6bed42b83a0a68f9a803d, type: 2}
+    - target: {fileID: 0}
+      propertyPath: dmg
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockbackRandomness
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: stunLock
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 109954}

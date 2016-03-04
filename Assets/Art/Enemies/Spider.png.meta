@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 16ff46f5968c8c54b9dbef49aecaf1c3
-timeCreated: 1455294187
+guid: b6e89f8d3c72a82429c98ef6ab36c444
+timeCreated: 1456155163
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: SmokeCustom_0
-    21300002: SmokeCustom_1
-    21300004: SmokeCustom_2
-    21300006: SmokeCustom_3
+    21300000: Spider_0
+    21300002: Spider_1
+    21300004: Spider_2
+    21300006: Spider_Shadow
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -54,48 +54,48 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: SmokeCustom_0
+    - name: Spider_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Spider_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: SmokeCustom_1
+    - name: Spider_2
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 16
-        height: 16
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: SmokeCustom_2
+    - name: Spider_Shadow
       rect:
         serializedVersion: 2
-        x: 32
+        x: 36
         y: 0
-        width: 16
-        height: 16
+        width: 12
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: SmokeCustom_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
