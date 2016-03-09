@@ -49,12 +49,8 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if(pauseScript.paused)
-        {
-            return;
-        }
 
-        if (camTarget != null)
+        if (camTarget != null && (!pauseScript.paused || !textbox.activeInHierarchy))
         {
             targetPos = new Vector3(camTarget.transform.position.x, camTarget.transform.position.y, -10);
             targetPos.x = ( Mathf.Clamp(targetPos.x, minX+horExtent, maxX-horExtent) );
@@ -62,12 +58,6 @@ public class CameraController : MonoBehaviour {
             //targetPos.x = (Mathf.Clamp(targetPos.x + Input.GetAxis("LookX"), minX + horExtent, maxX - horExtent));
             //targetPos.y = (Mathf.Clamp(targetPos.y + Input.GetAxis("LookY"), minY + verExtent, maxY - verExtent));
         }
-
-        if (textbox.activeInHierarchy)
-        {
-            return;
-        }
-
 
         if (cam.orthographicSize != targetSize)
         {

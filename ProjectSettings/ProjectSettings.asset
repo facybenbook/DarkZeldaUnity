@@ -419,8 +419,12 @@ PlayerSettings:
   boolPropertyNames:
   - XboxOne::enus
   XboxOne::enus: 1
-  stringPropertyNames: []
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  stringPropertyNames:
+  - Build_ServiceEnabled::Build_ServiceEnabled
+  - UNet_ServiceEnabled::UNet_ServiceEnabled
+  Build_ServiceEnabled::Build_ServiceEnabled: True
+  UNet_ServiceEnabled::UNet_ServiceEnabled: True
+  cloudProjectId: 91d48636-6985-4aa4-b5b8-5be128301890
+  projectName: DarkZelda
+  organizationId: macadamchris
   cloudEnabled: 0

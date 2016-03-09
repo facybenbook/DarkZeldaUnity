@@ -10,6 +10,8 @@ public class RandomMovement : MonoBehaviour {
     private float timer;
     private Rigidbody2D rb;
     private EnemyMovementManager EMM;
+    public bool runFromPlayer;
+    public float runRandomness;
 
 	// Use this for initialization
 	void Start () {
@@ -29,8 +31,15 @@ public class RandomMovement : MonoBehaviour {
             }
             if(timer <= 0)
             {
+                if(runFromPlayer && EMM.sightToPlayer)
+                {
+                    rb.velocity += (new Vector2(transform.position.x - EMM.player.transform.position.x, transform.position.y - EMM.player.transform.position.y) + new Vector2 (Random.Range(-runRandomness,runRandomness),Random.Range(-runRandomness,runRandomness))).normalized * (moveSpd + Random.Range(-spdRandomness, spdRandomness));
+                }
+                else
+                {
+                    rb.velocity += new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * (moveSpd + Random.Range(-spdRandomness, spdRandomness));
+                }
                 timer = timeBetweenMovement + Random.Range(-timerRandomness, timerRandomness);
-                rb.velocity += new Vector2(Random.Range(-1f,1f), Random.Range(-1f, 1f)).normalized * (moveSpd + Random.Range(-spdRandomness,spdRandomness)); 
 
             }
         }

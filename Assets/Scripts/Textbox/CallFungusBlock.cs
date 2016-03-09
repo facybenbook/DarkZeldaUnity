@@ -14,6 +14,7 @@ public class CallFungusBlock : MonoBehaviour
     private Pause pauseScript;
     private GameObject player;
     private CircleCollider2D col;
+    private CameraController cam;
 
     // Use this for initialization
     void Start()
@@ -22,6 +23,7 @@ public class CallFungusBlock : MonoBehaviour
         textbox = GameObject.FindGameObjectWithTag("Textbox");
         player = GameObject.FindGameObjectWithTag("Player");
         col = GetComponent<CircleCollider2D>();
+        cam = FindObjectOfType<CameraController>();
         
 
     }
@@ -37,6 +39,8 @@ public class CallFungusBlock : MonoBehaviour
             }
             if ((textbox == null || !textboxActive) && Input.GetButtonDown("Interact") && pauseScript.paused == false)
             {
+                cam.targetPos = transform.position;
+                cam.targetPos.z = -10;
                 flowchart.ExecuteBlock(blockToCall);
                 pauseScript.PauseGame(true);
             }
